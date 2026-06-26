@@ -7,8 +7,9 @@ class LinkedList:
         self.head = None
         self.tail = None
 
-    def add(self, data):
-        """Add a new node at end of list - O(1)"""
+    def push(self, data) -> None:
+        """Add a new node at end of list
+        :param data: the value or object to be added to the LinkedList"""
         node = Node(data)
         if not self.head:
             self.head = node

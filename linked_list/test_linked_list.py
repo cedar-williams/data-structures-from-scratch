@@ -11,7 +11,7 @@ def test_new_list_is_empty():
 def test_new_list_with_one_node():
     test_data = "test data"
     test_list = LinkedList()
-    test_list.add(test_data)
+    test_list.push(test_data)
 
     assert test_list.head is test_list.tail
     assert test_list.head.data == test_data
@@ -20,8 +20,8 @@ def test_add_new_node_to_existing_list():
     first_test_data = "first test data"
     second_test_data = "second test data"
     test_list = LinkedList()
-    test_list.add(first_test_data)
-    test_list.add(second_test_data)
+    test_list.push(first_test_data)
+    test_list.push(second_test_data)
 
     assert test_list.head is not test_list.tail
     assert test_list.head.data == first_test_data
