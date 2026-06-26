@@ -1,4 +1,4 @@
-from Node import Node
+from node import Node
 
 def test_new_node_is_empty():
     test_node = Node("test string")
