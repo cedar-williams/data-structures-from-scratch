@@ -11,7 +11,7 @@ class LinkedList:
         self.tail = None
         self.size = 0
 
-    def push(self, data) -> None:
+    def push(self, data: Any) -> None:
         """Add a new node at end of list
         :param data: the value or object to be added to the LinkedList"""
         node = Node(data)
@@ -42,6 +42,38 @@ class LinkedList:
                 self.tail = self.tail.prev_node
 
             return return_data
+
+    def insert(self, index: int, data: Any) -> None:
+        """Add a new node at the specific index, slots between prev and current node
+        :raises IndexError: if the index is out of the range of the list"""
+        raise NotImplementedError
+
+    def remove(self, index: int) -> Any:
+        """Remove node at current index
+        :raises IndexError: if the index is out of the range of the list"""
+        raise NotImplementedError
+
+    def get(self, index: int) -> Any:
+        """:returns: data of node at index
+        :raises IndexError: if the index is out of the range of the list"""
+        if index not in range(0, self.size):
+            raise IndexError
+
+
+    def set(self, index:int, data: Any) -> Any:
+        raise NotImplementedError
+
+    def _node_at_index(self, index: int) -> Node:
+        """Index must refer to a valid node
+        :returns: Node at index"""
+        node_count = 0
+        current_node = self.head
+        while node_count < index:
+            current_node = current_node.next_node
+            node_count += 1
+
+        return current_node
+
 
     def __len__(self) -> int:
         """:returns: number of nodes in list"""

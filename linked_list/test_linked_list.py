@@ -37,15 +37,13 @@ def test_new_empty_list_add_one_node():
     assert test_list.size == 1
 
 def test_add_new_node_to_existing_list():
-    first_test_data = "first test data"
-    second_test_data = "second test data"
     test_list = LinkedList()
-    test_list.push(first_test_data)
-    test_list.push(second_test_data)
+    test_list.push(NODE_ONE_DATA)
+    test_list.push(NODE_TWO_DATA)
 
     assert test_list.head is not test_list.tail
-    assert test_list.head.data == first_test_data
-    assert test_list.tail.data == second_test_data
+    assert test_list.head.data == NODE_ONE_DATA
+    assert test_list.tail.data == NODE_TWO_DATA
     assert test_list.head.next_node is test_list.tail
     assert test_list.tail.prev_node is test_list.head
     assert test_list.head.prev_node is None
@@ -75,6 +73,15 @@ def test_pop_when_list_has_two_nodes(list_with_two_nodes):
     assert list_with_two_nodes.tail is head_node
     assert head_node.next_node is None
     assert list_with_two_nodes.size == 1
+
+
+# Testing _node_at_index() method
+def test_node_at_index_when_list_has_one_node(list_with_one_node):
+    assert list_with_one_node._node_at_index(0) is list_with_one_node.head
+
+def test_node_at_index_when_list_has_two_nodes(list_with_two_nodes):
+    assert list_with_two_nodes._node_at_index(0) is list_with_two_nodes.head
+    assert list_with_two_nodes._node_at_index(1) is list_with_two_nodes.tail
 
 
 # Testing __len__() method
