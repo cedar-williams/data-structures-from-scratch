@@ -56,8 +56,9 @@ class LinkedList:
     def get(self, index: int) -> Any:
         """:returns: data of node at index
         :raises IndexError: if the index is out of the range of the list"""
-        if index not in range(0, self.size):
-            raise IndexError
+        if index < 0 or index >= self.size:
+            raise IndexError("Index out of range")
+        return self._node_at_index(index).data
 
 
     def set(self, index:int, data: Any) -> Any:
