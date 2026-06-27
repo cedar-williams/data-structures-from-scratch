@@ -1,6 +1,7 @@
 from typing import Any
 
 from node import Node
+from linked_list_iterator import LinkedListIterator
 
 class LinkedList:
     """Linked list implementation"""
@@ -45,3 +46,8 @@ class LinkedList:
     def __len__(self) -> int:
         """:returns: number of nodes in list"""
         return self.size
+
+    def __iter__(self) -> LinkedListIterator:
+        """Returns an iterator that traverses the LinkedList from head to tail.
+        :returns: An iterator for traversing the linked list"""
+        return LinkedListIterator(self)

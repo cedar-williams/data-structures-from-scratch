@@ -86,3 +86,14 @@ def test_len_when_list_has_one_node(list_with_one_node):
 
 def test_len_when_list_has_two_nodes(list_with_two_nodes):
     assert len(list_with_two_nodes) == 2
+
+
+# Testing iterator
+def test_iter_when_list_empty(empty_list):
+    assert list(empty_list) == []
+
+def test_iter_when_list_has_one_node(list_with_one_node):
+    assert list(list_with_one_node) == [NODE_ONE_DATA]
+
+def test_iter_when_list_has_two_nodes(list_with_two_nodes):
+    assert list(list_with_two_nodes) == [NODE_ONE_DATA, NODE_TWO_DATA]
