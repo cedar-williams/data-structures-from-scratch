@@ -61,8 +61,12 @@ class LinkedList:
         return self._node_at_index(index).data
 
 
-    def set(self, index:int, data: Any) -> Any:
-        raise NotImplementedError
+    def set(self, index: int, data: Any) -> Any:
+        """Sets the data value of an existing node at the specified index
+        :raises IndexError: if the index is out of the range of the list"""
+        if index < 0 or index >= self.size:
+            raise IndexError("Index out of range")
+        self._node_at_index(index).data = data
 
     def _node_at_index(self, index: int) -> Node:
         """Index must refer to a valid node
