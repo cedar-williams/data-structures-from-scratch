@@ -26,7 +26,8 @@ class LinkedList:
 
     def pop(self) -> Any:
         """Remove the last node from the list
-        :return: Data of node, None if list is empty"""
+        :return: Data of node, None if list is empty
+        :raises IndexError: if the list is empty"""
         if self.head is None:
             raise IndexError("List is empty")
         else:
@@ -42,6 +43,5 @@ class LinkedList:
             return return_data
 
     def __len__(self) -> int:
-        """:return: number of nodes in list"""
+        """:returns: number of nodes in list"""
         return self.size
-
