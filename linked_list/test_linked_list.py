@@ -2,8 +2,11 @@ from linked_list import LinkedList
 import pytest
 
 
-NODE_ONE_DATA = "node one test data"
-NODE_TWO_DATA = "node two test data"
+NODE_ONE_DATA = "node one"
+NODE_TWO_DATA = "node two"
+
+UPDATED_NODE_ONE_DATA = "updated node one"
+UPDATED_NODE_TWO_DATA = "updated node two"
 
 # Fixtures
 @pytest.fixture
@@ -98,18 +101,42 @@ def test_get_invalid_index_when_list_has_two_nodes(list_with_two_nodes, index):
     with pytest.raises(IndexError):
         list_with_two_nodes.get(index)
 
-@pytest.mark.parametrize(
-    "index, expected",
-    [
-        (0, NODE_ONE_DATA),
-        (1, NODE_TWO_DATA)
-    ]
-)
+@pytest.mark.parametrize("index, expected",
+    [(0, NODE_ONE_DATA), (1, NODE_TWO_DATA)])
 def test_get_valid_index_when_list_has_two_nodes(list_with_two_nodes, index, expected):
     assert list_with_two_nodes.get(index) == expected
 
 
 # Testing set() method
+@pytest.mark.parametrize("index", [-1,0,1])
+def test_set_index_when_list_empty(empty_list, index):
+    with pytest.raises(IndexError):
+        empty_list.set(index, "data")
+
+@pytest.mark.parametrize("index", [-1,1])
+def test_set_invalid_index_when_list_has_one_node(list_with_one_node, index):
+    with pytest.raises(IndexError):
+        list_with_one_node.set(index, "data")
+
+def test_set_valid_index_when_list_has_one_node(list_with_one_node):
+    list_with_one_node.set(0, UPDATED_NODE_ONE_DATA)
+    assert list_with_one_node.get(0) == UPDATED_NODE_ONE_DATA
+    assert list(list_with_one_node) == [UPDATED_NODE_ONE_DATA]
+    assert list_with_one_node.size == 1
+
+@pytest.mark.parametrize("index", [-1,2])
+def test_set_invalid_index_when_list_has_two_nodes(list_with_two_nodes, index):
+    with pytest.raises(IndexError):
+        list_with_two_nodes.set(index, "data")
+
+@pytest.mark.parametrize("index, new_data, expected_list",
+                         [(0, UPDATED_NODE_ONE_DATA, [UPDATED_NODE_ONE_DATA,NODE_TWO_DATA]),
+                          (1, UPDATED_NODE_TWO_DATA, [NODE_ONE_DATA, UPDATED_NODE_TWO_DATA])])
+def test_set_valid_index_when_list_has_two_nodes(list_with_two_nodes, index, new_data, expected_list):
+    list_with_two_nodes.set(index, new_data)
+    assert list_with_two_nodes.get(index) == new_data
+    assert list_with_two_nodes.size == 2
+    assert list(list_with_two_nodes) == expected_list
 
 
 # Testing _node_at_index() method
