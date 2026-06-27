@@ -75,6 +75,43 @@ def test_pop_when_list_has_two_nodes(list_with_two_nodes):
     assert list_with_two_nodes.size == 1
 
 
+# Testing insert() method
+
+# Testing remove() method
+
+# Testing get() method
+@pytest.mark.parametrize("index", [-1,0,1])
+def test_get_index_when_list_empty(empty_list, index):
+    with pytest.raises(IndexError):
+        empty_list.get(index)
+
+@pytest.mark.parametrize("index", [-1,1])
+def test_get_invalid_index_when_list_has_one_node(list_with_one_node, index):
+    with pytest.raises(IndexError):
+        list_with_one_node.get(index)
+
+def test_get_valid_index_when_list_has_one_node(list_with_one_node):
+    assert list_with_one_node.get(0) == NODE_ONE_DATA
+
+@pytest.mark.parametrize("index", [-1,2])
+def test_get_invalid_index_when_list_has_two_nodes(list_with_two_nodes, index):
+    with pytest.raises(IndexError):
+        list_with_two_nodes.get(index)
+
+@pytest.mark.parametrize(
+    "index, expected",
+    [
+        (0, NODE_ONE_DATA),
+        (1, NODE_TWO_DATA)
+    ]
+)
+def test_get_valid_index_when_list_has_two_nodes(list_with_two_nodes, index, expected):
+    assert list_with_two_nodes.get(index) == expected
+
+
+# Testing set() method
+
+
 # Testing _node_at_index() method
 def test_node_at_index_when_list_has_one_node(list_with_one_node):
     assert list_with_one_node._node_at_index(0) is list_with_one_node.head
