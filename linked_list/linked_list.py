@@ -45,23 +45,33 @@ class LinkedList:
             return return_data
 
     def insert(self, index: int, data: Any) -> None:
-        """Add a new node at the specific index, slots between prev and current node
+        """Add a new node at the specific index, valid index: 0 <= index <= len(list)
         :raises IndexError: if the index is out of the range of the list"""
-        if index < 0 or index >= self.size:
+        if index < 0 or index > self.size:
             raise IndexError("Index out of range")
+
         new_node = Node(data)
-        if index == 0: # Index is first
-            cur_node = self.head
+        if self.size == 0:
             self.head = new_node
-            new_node.next_node = cur_node
-            cur_node.prev_node = new_node
+            self.tail = new_node
         else:
-            cur_node = self._node_at_index(index)
-            back_node = cur_node.prev_node
-            back_node.next_node = new_node
-            cur_node.prev_node = new_node
-            new_node.prev_node = back_node
-            new_node.next_node = cur_node
+            if index == 0: # First node
+                cur_node = self.head
+                self.head = new_node
+                new_node.next_node = cur_node
+                cur_node.prev_node = new_node
+            elif index == self.size: # After last node
+                back_node = self.tail
+                self.tail = new_node
+                back_node.next_node = new_node
+                new_node.prev_node = back_node
+            else: # In the middle
+                cur_node = self._node_at_index(index)
+                back_node = cur_node.prev_node
+                new_node.prev_node = back_node
+                new_node.next_node = cur_node
+                back_node.next_node = new_node
+                cur_node.prev_node = new_node
         self.size += 1
 
 

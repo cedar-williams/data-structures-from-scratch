@@ -10,6 +10,7 @@ UPDATED_NODE_TWO_DATA = "updated node two"
 
 NODE_ONE_INSERT_DATA = "insert node one"
 NODE_TWO_INSERT_DATA = "insert node two"
+NODE_THREE_INSERT_DATA = "insert node three"
 
 # Fixtures
 @pytest.fixture
@@ -82,37 +83,66 @@ def test_pop_when_list_has_two_nodes(list_with_two_nodes):
 
 
 # Testing insert() method
-@pytest.mark.parametrize("index", [-1,0,1])
-def test_insert_list_is_empty(empty_list, index):
+@pytest.mark.parametrize("index", [-1,1])
+def test_insert_invalid_index_list_is_empty(empty_list, index):
     with pytest.raises(IndexError):
         empty_list.insert(index, "data")
     assert empty_list.size == 0
+    assert list(empty_list) == []
 
-@pytest.mark.parametrize("index", [-1,1])
+def test_insert_valid_index_list_is_empty(empty_list):
+    empty_list.insert(0, NODE_ONE_INSERT_DATA)
+    assert empty_list.head is empty_list.tail
+    assert empty_list.get(0) == NODE_ONE_INSERT_DATA
+    assert list(empty_list) == [NODE_ONE_INSERT_DATA]
+    assert empty_list.size == 1
+    assert len(empty_list) == 1
+
+@pytest.mark.parametrize("index", [-1,2])
 def test_insert_invalid_index_when_list_has_one_node(list_with_one_node, index):
     with pytest.raises(IndexError):
         list_with_one_node.insert(index, "data")
     assert list_with_one_node.size == 1
+    assert list(list_with_one_node) == [NODE_ONE_DATA]
 
-def test_insert_valid_index_when_list_has_one_node(list_with_one_node):
-    list_with_one_node.insert(0, NODE_ONE_INSERT_DATA)
+@pytest.mark.parametrize("index, new_data, expected_list",
+                        [(0, NODE_ONE_INSERT_DATA, [NODE_ONE_INSERT_DATA, NODE_ONE_DATA]),
+                         (1, NODE_TWO_INSERT_DATA, [NODE_ONE_DATA, NODE_TWO_INSERT_DATA])])
+def test_insert_valid_index_when_list_has_one_node(list_with_one_node, index, new_data, expected_list):
+    list_with_one_node.insert(index, new_data)
 
-    assert list(list_with_one_node) == [NODE_ONE_INSERT_DATA, NODE_ONE_DATA]
     assert list_with_one_node.size == 2
+    assert list(list_with_one_node) == expected_list
 
-@pytest.mark.parametrize("index", [-1,2])
+
+@pytest.mark.parametrize("index", [-1,3])
 def test_insert_invalid_index_when_list_has_two_nodes(list_with_two_nodes, index):
     with pytest.raises(IndexError):
         list_with_two_nodes.insert(index, "data")
     assert list_with_two_nodes.size == 2
+    assert list(list_with_two_nodes) == [NODE_ONE_DATA, NODE_TWO_DATA]
 
 @pytest.mark.parametrize("index, new_data, expected_list",
                         [(0, NODE_ONE_INSERT_DATA, [NODE_ONE_INSERT_DATA, NODE_ONE_DATA, NODE_TWO_DATA]),
-                         (1, NODE_TWO_INSERT_DATA, [NODE_ONE_DATA, NODE_TWO_INSERT_DATA, NODE_TWO_DATA])])
+                         (1, NODE_TWO_INSERT_DATA, [NODE_ONE_DATA, NODE_TWO_INSERT_DATA, NODE_TWO_DATA]),
+                         (2, NODE_THREE_INSERT_DATA, [NODE_ONE_DATA, NODE_TWO_DATA, NODE_THREE_INSERT_DATA])])
 def test_insert_valid_index_when_list_has_two_nodes(list_with_two_nodes, index, new_data, expected_list):
     list_with_two_nodes.insert(index, new_data)
     assert list(list_with_two_nodes) == expected_list
     assert list_with_two_nodes.size == 3
+
+def test_insert_in_middle_of_two_nodes(list_with_two_nodes):
+    old_head = list_with_two_nodes.head
+    old_tail = list_with_two_nodes.tail
+    list_with_two_nodes.insert(1, NODE_TWO_INSERT_DATA)
+    new_node = list_with_two_nodes._node_at_index(1)
+    assert list_with_two_nodes.head is old_head
+    assert list_with_two_nodes.tail is old_tail
+    assert list_with_two_nodes.head.next_node is new_node
+    assert list_with_two_nodes.tail.prev_node is new_node
+    assert new_node.next_node is list_with_two_nodes.tail
+    assert new_node.prev_node is list_with_two_nodes.head
+
 
 # Testing remove() method
 
