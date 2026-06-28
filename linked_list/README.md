@@ -2,7 +2,7 @@ Methods to implement
 
 - [x] push 
 - [x] pop 
-- [ ] insert 
+- [x] insert 
 - [ ] remove 
 - [x] get 
 - [x] set 
