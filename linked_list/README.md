@@ -1,0 +1,20 @@
+Methods to implement
+
+- [x] push 
+- [x] pop 
+- [ ] insert 
+- [ ] remove 
+- [x] get 
+- [x] set 
+- [ ] clear 
+- [ ] find 
+- [ ] reverse
+- [x] __len__
+- [x] __iter__
+- [ ] __contains__
+- [ ] __getitem__
+- [ ] __setitem__
+- [ ] __delitem__
+- [ ] __str__
+- [ ] __repr__
+- [x] _node_at_index
