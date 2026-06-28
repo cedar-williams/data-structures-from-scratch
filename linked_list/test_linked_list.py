@@ -4,6 +4,7 @@ import pytest
 
 NODE_ONE_DATA = "node one"
 NODE_TWO_DATA = "node two"
+NODE_THREE_DATA = "node three"
 
 UPDATED_NODE_ONE_DATA = "updated node one"
 UPDATED_NODE_TWO_DATA = "updated node two"
@@ -26,6 +27,11 @@ def list_with_one_node(empty_list):
 def list_with_two_nodes(list_with_one_node):
     list_with_one_node.push(NODE_TWO_DATA)
     return list_with_one_node
+
+@pytest.fixture
+def list_with_three_nodes(list_with_two_nodes):
+    list_with_two_nodes.push(NODE_THREE_DATA)
+    return list_with_two_nodes
 
 
 # Testing list itself, __init__()
@@ -145,6 +151,60 @@ def test_insert_in_middle_of_two_nodes(list_with_two_nodes):
 
 
 # Testing remove() method
+@pytest.mark.parametrize("index", [-1,0,1])
+def test_remove_list_empty(empty_list, index):
+    with pytest.raises(IndexError):
+        empty_list.remove(index)
+    assert empty_list.size == 0
+    assert list(empty_list) == []
+
+@pytest.mark.parametrize("index", [-1,1])
+def test_remove_invalid_index_list_with_one_node(list_with_one_node, index):
+    with pytest.raises(IndexError):
+        list_with_one_node.remove(index)
+    assert list_with_one_node.size == 1
+    assert list(list_with_one_node) == [NODE_ONE_DATA]
+    assert len(list_with_one_node) == 1
+
+def test_remove_valid_index_list_with_one_node(list_with_one_node):
+    return_val = list_with_one_node.remove(0)
+
+    assert list_with_one_node.size == 0
+    assert list(list_with_one_node) == []
+    assert list_with_one_node.head is None
+    assert list_with_one_node.tail is None
+    assert return_val == NODE_ONE_DATA
+
+@pytest.mark.parametrize("index", [-1,2])
+def test_remove_invalid_index_list_with_two_nodes(list_with_two_nodes, index):
+    with pytest.raises(IndexError):
+        list_with_two_nodes.remove(index)
+
+    assert list_with_two_nodes.size == 2
+    assert list(list_with_two_nodes) == [NODE_ONE_DATA, NODE_TWO_DATA]
+    assert len(list_with_two_nodes) == 2
+
+@pytest.mark.parametrize("index, expected_return, expected_remaining_list",
+                         [(0, NODE_ONE_DATA, [NODE_TWO_DATA]),
+                          (1, NODE_TWO_DATA, [NODE_ONE_DATA])])
+def test_remove_valid_index_list_with_two_nodes(list_with_two_nodes, index, expected_return, expected_remaining_list):
+    return_val = list_with_two_nodes.remove(index)
+
+    assert return_val == expected_return
+    assert list_with_two_nodes.size == 1
+    assert len(list_with_two_nodes) == 1
+    assert list(list_with_two_nodes) == expected_remaining_list
+
+def test_remove_from_middle_of_three_nodes(list_with_three_nodes):
+    return_val = list_with_three_nodes.remove(1)
+
+    assert return_val == NODE_TWO_DATA
+    assert list_with_three_nodes.size == 2
+    assert len(list_with_three_nodes) == 2
+    assert list(list_with_three_nodes) == [NODE_ONE_DATA, NODE_THREE_DATA]
+    assert list_with_three_nodes.head.next_node is list_with_three_nodes.tail
+    assert list_with_three_nodes.tail.prev_node is list_with_three_nodes.head
+
 
 # Testing get() method
 @pytest.mark.parametrize("index", [-1,0,1])

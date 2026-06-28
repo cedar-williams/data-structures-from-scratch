@@ -74,12 +74,29 @@ class LinkedList:
                 cur_node.prev_node = new_node
         self.size += 1
 
-
-    # TODO
     def remove(self, index: int) -> Any:
         """Remove node at current index
         :raises IndexError: if the index is out of the range of the list"""
-        raise NotImplementedError
+        if index < 0 or index >= self.size:
+            raise IndexError("Index out of range")
+
+        removed_node = self._node_at_index(index)
+        if self.size == 1:
+            self.clear()
+        else:
+            if index == 0: # First node
+                self.head = self.head.next_node
+                self.head.prev_node = None
+            elif index == self.size - 1: # Last node
+                self.tail = self.tail.prev_node
+                self.tail.next_node = None
+            else:
+                back_node = removed_node.prev_node
+                front_node = removed_node.next_node
+                back_node.next_node = front_node
+                front_node.prev_node = back_node
+            self.size -= 1
+        return removed_node.data
 
     def get(self, index: int) -> Any:
         """:returns: data of node at index
