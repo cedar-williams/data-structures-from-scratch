@@ -178,6 +178,22 @@ def test_set_valid_index_when_list_has_two_nodes(list_with_two_nodes, index, new
     assert list(list_with_two_nodes) == expected_list
 
 
+# Testing clear() method
+def test_clear_empty_list(empty_list):
+    empty_list.clear()
+    assert empty_list.size == 0
+    assert empty_list.head is None
+    assert empty_list.tail is None
+    assert list(empty_list) == []
+
+def test_clear_populated_list(list_with_two_nodes):
+    list_with_two_nodes.clear()
+    assert list_with_two_nodes.size == 0
+    assert list_with_two_nodes.head is None
+    assert list_with_two_nodes.tail is None
+    assert list(list_with_two_nodes) == []
+
+
 # Testing _node_at_index() method
 def test_node_at_index_when_list_has_one_node(list_with_one_node):
     assert list_with_one_node._node_at_index(0) is list_with_one_node.head

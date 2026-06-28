@@ -85,6 +85,12 @@ class LinkedList:
             raise IndexError("Index out of range")
         self._node_at_index(index).data = data
 
+    def clear(self) -> None:
+        """Empties the list"""
+        self.head = None
+        self.tail = None
+        self.size = 0
+
     def _node_at_index(self, index: int) -> Node:
         """Index must refer to a valid node
         :returns: Node at index"""
