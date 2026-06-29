@@ -7,6 +7,7 @@ Methods to implement
 - [x] get 
 - [x] set 
 - [x] clear 
+- [x] index
 - [ ] find 
 - [ ] reverse
 - [x] __len__

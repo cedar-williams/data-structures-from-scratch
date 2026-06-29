@@ -118,6 +118,20 @@ class LinkedList:
         self.tail = None
         self.size = 0
 
+    def index(self, data: Any) -> int:
+        """:returns: index of first match
+        :raises ValueError: if match not found"""
+        cur_node = self.head
+        index = 0
+        if cur_node is None:
+            raise ValueError
+        while cur_node is not None:
+            if cur_node.data == data:
+                return index
+            index += 1
+            cur_node = cur_node.next_node
+        raise ValueError
+
     def _node_at_index(self, index: int) -> Node:
         """Index must refer to a valid node
         :returns: Node at index"""

@@ -1,6 +1,7 @@
 from linked_list import LinkedList
 import pytest
 
+NODE_DUPLICATE_DATA = "node duplicate"
 
 NODE_ONE_DATA = "node one"
 NODE_TWO_DATA = "node two"
@@ -12,6 +13,8 @@ UPDATED_NODE_TWO_DATA = "updated node two"
 NODE_ONE_INSERT_DATA = "insert node one"
 NODE_TWO_INSERT_DATA = "insert node two"
 NODE_THREE_INSERT_DATA = "insert node three"
+
+DATA_NOT_IN_ANY_NODE = "bad data"
 
 # Fixtures
 @pytest.fixture
@@ -32,6 +35,14 @@ def list_with_two_nodes(list_with_one_node):
 def list_with_three_nodes(list_with_two_nodes):
     list_with_two_nodes.push(NODE_THREE_DATA)
     return list_with_two_nodes
+
+@pytest.fixture
+def list_with_three_nodes_identical():
+    list_obj = LinkedList()
+    list_obj.push(NODE_DUPLICATE_DATA)
+    list_obj.push(NODE_DUPLICATE_DATA)
+    list_obj.push(NODE_DUPLICATE_DATA)
+    return list_obj
 
 
 # Testing list itself, __init__()
@@ -282,6 +293,36 @@ def test_clear_populated_list(list_with_two_nodes):
     assert list_with_two_nodes.head is None
     assert list_with_two_nodes.tail is None
     assert list(list_with_two_nodes) == []
+
+
+# Testing index() method
+def test_index_with_empty_list(empty_list):
+    with pytest.raises(ValueError):
+        empty_list.index(DATA_NOT_IN_ANY_NODE)
+    assert len(empty_list) == 0
+
+def test_index_invalid_data_with_list_with_three_nodes(list_with_three_nodes):
+    with pytest.raises(ValueError):
+        list_with_three_nodes.index(DATA_NOT_IN_ANY_NODE)
+    assert len(list_with_three_nodes) == 3
+
+@pytest.mark.parametrize("search_data, expected_index",
+                         [(NODE_ONE_DATA, 0),
+                          (NODE_TWO_DATA, 1),
+                          (NODE_THREE_DATA, 2)])
+def test_index_valid_data_with_list_with_three_nodes(list_with_three_nodes, search_data, expected_index):
+    index_result = list_with_three_nodes.index(search_data)
+    assert index_result == expected_index
+    assert len(list_with_three_nodes) == 3
+    assert list(list_with_three_nodes) == [NODE_ONE_DATA, NODE_TWO_DATA, NODE_THREE_DATA]
+
+def test_index_invalid_data_with_list_with_three_nodes_identical(list_with_three_nodes_identical):
+    with pytest.raises(ValueError):
+        list_with_three_nodes_identical.index(DATA_NOT_IN_ANY_NODE)
+
+def test_index_valid_data_with_list_with_three_nodes_identical(list_with_three_nodes_identical):
+    index_result = list_with_three_nodes_identical.index(NODE_DUPLICATE_DATA)
+    assert index_result == 0
 
 
 # Testing _node_at_index() method
