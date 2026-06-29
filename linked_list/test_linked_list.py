@@ -16,6 +16,14 @@ NODE_THREE_INSERT_DATA = "insert node three"
 
 DATA_NOT_IN_ANY_NODE = "bad data"
 
+def linked_list_to_backwards_list(linked_list: LinkedList) -> list:
+    return_list = []
+    cur_node = linked_list.tail
+    while cur_node is not None:
+        return_list.append(cur_node.data)
+        cur_node = cur_node.prev_node
+    return return_list
+
 # Fixtures
 @pytest.fixture
 def empty_list():
@@ -32,9 +40,22 @@ def list_with_two_nodes(list_with_one_node):
     return list_with_one_node
 
 @pytest.fixture
+def list_with_two_nodes_backwards(empty_list):
+    empty_list.push(NODE_TWO_DATA)
+    empty_list.push(NODE_ONE_DATA)
+    return empty_list
+
+@pytest.fixture
 def list_with_three_nodes(list_with_two_nodes):
     list_with_two_nodes.push(NODE_THREE_DATA)
     return list_with_two_nodes
+
+@pytest.fixture
+def list_with_three_nodes_backwards(empty_list):
+    empty_list.push(NODE_THREE_DATA)
+    empty_list.push(NODE_TWO_DATA)
+    empty_list.push(NODE_ONE_DATA)
+    return empty_list
 
 @pytest.fixture
 def list_with_three_nodes_identical():
@@ -324,6 +345,27 @@ def test_index_valid_data_with_list_with_three_nodes_identical(list_with_three_n
     index_result = list_with_three_nodes_identical.index(NODE_DUPLICATE_DATA)
     assert index_result == 0
 
+
+# Testing reverse() method
+def test_reverse_empty_list(empty_list):
+    empty_list.reverse()
+    assert list(empty_list) == []
+
+def test_reverse_list_with_one_node(list_with_one_node):
+    initial_state = list(list_with_one_node)
+    list_with_one_node.reverse()
+    assert list(list_with_one_node) == initial_state
+
+def test_reverse_list_with_two_nodes(list_with_two_nodes, list_with_two_nodes_backwards):
+    list_with_two_nodes.reverse()
+    assert list(list_with_two_nodes) == list(list_with_two_nodes_backwards)
+
+def test_reverse_list_with_three_nodes(list_with_three_nodes, list_with_three_nodes_backwards):
+    comparison_list = linked_list_to_backwards_list(list_with_three_nodes)
+    list_with_three_nodes.reverse()
+
+    assert list(list_with_three_nodes) == list(list_with_three_nodes_backwards)
+    assert list(list_with_three_nodes) == comparison_list
 
 # Testing _node_at_index() method
 def test_node_at_index_when_list_has_one_node(list_with_one_node):

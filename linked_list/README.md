@@ -12,6 +12,7 @@ Methods to implement
 - [ ] reverse
 - [x] __len__
 - [x] __iter__
+- [ ] __eq__
 - [ ] __contains__
 - [ ] __getitem__
 - [ ] __setitem__

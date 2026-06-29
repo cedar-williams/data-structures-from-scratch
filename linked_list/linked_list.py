@@ -132,6 +132,23 @@ class LinkedList:
             cur_node = cur_node.next_node
         raise ValueError
 
+    def reverse(self) -> None:
+        """Reverse the LinkedList in place"""
+        cur_node = self.head
+
+        # Swap head and tail
+        old_head = self.tail
+        self.head = self.tail
+        self.tail = old_head
+
+        while cur_node is not None: # Swap prev next node
+            back_node = cur_node.prev_node
+            cur_node.prev_node = cur_node.next_node
+            cur_node.next_node = back_node
+
+            cur_node = cur_node.prev_node
+
+
     def _node_at_index(self, index: int) -> Node:
         """Index must refer to a valid node
         :returns: Node at index"""
