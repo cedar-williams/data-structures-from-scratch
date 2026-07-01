@@ -30,32 +30,52 @@ def empty_list():
     return LinkedList()
 
 @pytest.fixture
-def list_with_one_node(empty_list):
-    empty_list.push(NODE_ONE_DATA)
-    return empty_list
+def another_empty_list():
+    return LinkedList()
 
 @pytest.fixture
-def list_with_two_nodes(list_with_one_node):
-    list_with_one_node.push(NODE_TWO_DATA)
-    return list_with_one_node
+def list_with_one_node():
+    temp_list = LinkedList()
+    temp_list.push(NODE_ONE_DATA)
+    return temp_list
 
 @pytest.fixture
-def list_with_two_nodes_backwards(empty_list):
-    empty_list.push(NODE_TWO_DATA)
-    empty_list.push(NODE_ONE_DATA)
-    return empty_list
+def list_with_two_nodes():
+    temp_list = LinkedList()
+    temp_list.push(NODE_ONE_DATA)
+    temp_list.push(NODE_TWO_DATA)
+    return temp_list
 
 @pytest.fixture
-def list_with_three_nodes(list_with_two_nodes):
-    list_with_two_nodes.push(NODE_THREE_DATA)
-    return list_with_two_nodes
+def list_with_two_nodes_backwards():
+    temp_list = LinkedList()
+    temp_list.push(NODE_TWO_DATA)
+    temp_list.push(NODE_ONE_DATA)
+    return temp_list
+
+@pytest.fixture
+def list_with_three_nodes():
+    temp_list = LinkedList()
+    temp_list.push(NODE_ONE_DATA)
+    temp_list.push(NODE_TWO_DATA)
+    temp_list.push(NODE_THREE_DATA)
+    return temp_list
+
+@pytest.fixture
+def another_list_with_three_nodes(list_with_two_nodes):
+    temp_list = LinkedList()
+    temp_list.push(NODE_ONE_DATA)
+    temp_list.push(NODE_TWO_DATA)
+    temp_list.push(NODE_THREE_DATA)
+    return temp_list
 
 @pytest.fixture
 def list_with_three_nodes_backwards(empty_list):
-    empty_list.push(NODE_THREE_DATA)
-    empty_list.push(NODE_TWO_DATA)
-    empty_list.push(NODE_ONE_DATA)
-    return empty_list
+    temp_list = LinkedList()
+    temp_list.push(NODE_THREE_DATA)
+    temp_list.push(NODE_TWO_DATA)
+    temp_list.push(NODE_ONE_DATA)
+    return temp_list
 
 @pytest.fixture
 def list_with_three_nodes_identical():
