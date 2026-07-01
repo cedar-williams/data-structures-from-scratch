@@ -13,7 +13,7 @@ Methods to implement
 - [x] __len__
 - [x] __iter__
 - [x] __eq__
-- [ ] __contains__
+- [x] __contains__
 - [ ] __getitem__
 - [ ] __setitem__
 - [ ] __delitem__

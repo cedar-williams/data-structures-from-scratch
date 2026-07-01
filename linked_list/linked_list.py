@@ -187,3 +187,10 @@ class LinkedList:
                 other_node = other_node.next_node
 
         return True
+
+    def __contains__(self, item):
+        """:returns: True if item in list, false if not"""
+        for single_item in self:
+            if single_item == item:
+                return True
+        return False

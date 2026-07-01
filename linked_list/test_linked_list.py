@@ -436,3 +436,21 @@ def test_eq_list_with_three_nodes(list_with_three_nodes, another_list_with_three
 def test_eq_same_size_diff_order(list_with_three_nodes, list_with_three_nodes_identical):
     assert list_with_three_nodes is not list_with_three_nodes_identical
     assert list_with_three_nodes != list_with_three_nodes_identical
+
+
+# Test __contains__() dunder method
+def test_contains_empty_list(empty_list):
+    assert NODE_ONE_DATA not in empty_list
+
+def test_contains_no_match_single_item_list(list_with_one_node):
+    assert DATA_NOT_IN_ANY_NODE not in list_with_one_node
+
+def test_contains_match_single_item_list(list_with_one_node):
+    assert NODE_ONE_DATA in list_with_one_node
+
+def test_contains_no_match_three_node_list(list_with_three_nodes):
+    assert DATA_NOT_IN_ANY_NODE not in list_with_three_nodes
+
+@pytest.mark.parametrize("node_data", [NODE_ONE_DATA, NODE_TWO_DATA, NODE_THREE_DATA])
+def test_contains_match_three_node_list(list_with_three_nodes, node_data):
+    assert node_data in list_with_three_nodes
