@@ -454,3 +454,30 @@ def test_contains_no_match_three_node_list(list_with_three_nodes):
 @pytest.mark.parametrize("node_data", [NODE_ONE_DATA, NODE_TWO_DATA, NODE_THREE_DATA])
 def test_contains_match_three_node_list(list_with_three_nodes, node_data):
     assert node_data in list_with_three_nodes
+
+
+# Test getitem, setitem, delitem dunder methods
+def test_getitem_valid_index(list_with_three_nodes):
+    assert list_with_three_nodes[0] == NODE_ONE_DATA
+
+def test_getitem_invalid_index(list_with_three_nodes):
+    with pytest.raises(IndexError):
+        result = list_with_three_nodes[5]
+
+def test_setitem_valid_index(list_with_three_nodes):
+    list_with_three_nodes[0] = NODE_ONE_INSERT_DATA
+    assert list_with_three_nodes.get(0) == NODE_ONE_INSERT_DATA
+
+def test_setitem_invalid_index(list_with_three_nodes):
+    with pytest.raises(IndexError):
+        list_with_three_nodes[5] = DATA_NOT_IN_ANY_NODE
+
+def test_delitem_valid_index(list_with_three_nodes):
+    del list_with_three_nodes[1]
+    assert list(list_with_three_nodes) == [NODE_ONE_DATA, NODE_THREE_DATA]
+
+def test_delitem_invalid_index(list_with_three_nodes):
+    with pytest.raises(IndexError):
+        del list_with_three_nodes[5]
+
+

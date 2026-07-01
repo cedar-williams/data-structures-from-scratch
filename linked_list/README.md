@@ -14,9 +14,9 @@ Methods to implement
 - [x] __iter__
 - [x] __eq__
 - [x] __contains__
-- [ ] __getitem__
-- [ ] __setitem__
-- [ ] __delitem__
+- [x] __getitem__
+- [x] __setitem__
+- [x] __delitem__
 - [ ] __str__
 - [ ] __repr__
 - [x] _node_at_index

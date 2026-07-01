@@ -105,7 +105,7 @@ class LinkedList:
             raise IndexError("Index out of range")
         return self._node_at_index(index).data
 
-    def set(self, index: int, data: Any) -> Any:
+    def set(self, index: int, data: Any) -> None:
         """Sets the data value of an existing node at the specified index
         :raises IndexError: if the index is out of the range of the list"""
         if index < 0 or index >= self.size:
@@ -188,9 +188,18 @@ class LinkedList:
 
         return True
 
-    def __contains__(self, item):
+    def __contains__(self, item) -> bool:
         """:returns: True if item in list, false if not"""
         for single_item in self:
             if single_item == item:
                 return True
         return False
+
+    def __getitem__(self, index: int) -> Any:
+        return self.get(index)
+
+    def __setitem__(self, index: int, data: Any) -> None:
+        self.set(index, data)
+
+    def __delitem__(self, index: int) -> None:
+        self.remove(index)
