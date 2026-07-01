@@ -169,3 +169,21 @@ class LinkedList:
         """Returns an iterator that traverses the LinkedList from head to tail.
         :returns: An iterator for traversing the linked list"""
         return LinkedListIterator(self)
+
+    def __eq__(self, other: "LinkedList") -> bool:
+        """:return NotImplemented: if other is not of same type"""
+        if not isinstance(other, LinkedList):
+            return NotImplemented
+        if len(self) != len(other):
+            return False
+
+        my_node = self.head
+        other_node = other.head
+        while my_node is not None:
+            if not my_node.data == other_node.data:
+                return False
+            else:
+                my_node = my_node.next_node
+                other_node = other_node.next_node
+
+        return True

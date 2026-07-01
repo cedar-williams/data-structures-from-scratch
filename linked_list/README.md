@@ -9,10 +9,10 @@ Methods to implement
 - [x] clear 
 - [x] index
 - [ ] find 
-- [ ] reverse
+- [x] reverse
 - [x] __len__
 - [x] __iter__
-- [ ] __eq__
+- [x] __eq__
 - [ ] __contains__
 - [ ] __getitem__
 - [ ] __setitem__

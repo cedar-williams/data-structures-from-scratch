@@ -1,3 +1,5 @@
+from pygments.lexers import oberon
+
 from linked_list import LinkedList
 import pytest
 
@@ -62,7 +64,7 @@ def list_with_three_nodes():
     return temp_list
 
 @pytest.fixture
-def another_list_with_three_nodes(list_with_two_nodes):
+def another_list_with_three_nodes():
     temp_list = LinkedList()
     temp_list.push(NODE_ONE_DATA)
     temp_list.push(NODE_TWO_DATA)
@@ -70,7 +72,7 @@ def another_list_with_three_nodes(list_with_two_nodes):
     return temp_list
 
 @pytest.fixture
-def list_with_three_nodes_backwards(empty_list):
+def list_with_three_nodes_backwards():
     temp_list = LinkedList()
     temp_list.push(NODE_THREE_DATA)
     temp_list.push(NODE_TWO_DATA)
@@ -416,3 +418,21 @@ def test_iter_when_list_has_one_node(list_with_one_node):
 
 def test_iter_when_list_has_two_nodes(list_with_two_nodes):
     assert list(list_with_two_nodes) == [NODE_ONE_DATA, NODE_TWO_DATA]
+
+
+# Test __eq__() dunder method
+def test_eq_empty_list(empty_list, another_empty_list):
+    assert empty_list is not another_empty_list
+    assert empty_list == another_empty_list
+
+def test_eq_nonmatching_lists_with_different_sizes(empty_list, list_with_three_nodes):
+    assert empty_list is not list_with_three_nodes
+    assert empty_list != list_with_three_nodes
+
+def test_eq_list_with_three_nodes(list_with_three_nodes, another_list_with_three_nodes):
+    assert list_with_three_nodes is not another_list_with_three_nodes
+    assert list_with_three_nodes == another_list_with_three_nodes
+
+def test_eq_same_size_diff_order(list_with_three_nodes, list_with_three_nodes_identical):
+    assert list_with_three_nodes is not list_with_three_nodes_identical
+    assert list_with_three_nodes != list_with_three_nodes_identical
