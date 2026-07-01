@@ -8,7 +8,6 @@ Methods to implement
 - [x] set 
 - [x] clear 
 - [x] index
-- [ ] find 
 - [x] reverse
 - [x] __len__
 - [x] __iter__
@@ -17,6 +16,6 @@ Methods to implement
 - [x] __getitem__
 - [x] __setitem__
 - [x] __delitem__
-- [ ] __str__
-- [ ] __repr__
+- [x] __str__
+- [x] __repr__
 - [x] _node_at_index

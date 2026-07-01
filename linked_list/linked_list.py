@@ -203,3 +203,9 @@ class LinkedList:
 
     def __delitem__(self, index: int) -> None:
         self.remove(index)
+
+    def __str__(self):
+        return "LinkedList(" +  str(list(self)) + ")"
+
+    def __repr__(self):
+        return "LinkedList(" +  str(list(self)) + ")"

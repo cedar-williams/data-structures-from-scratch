@@ -481,3 +481,15 @@ def test_delitem_invalid_index(list_with_three_nodes):
         del list_with_three_nodes[5]
 
 
+# Test str and repr dunder methods
+def test_str_empty_list(empty_list):
+    assert str(empty_list) == "LinkedList([])"
+
+def test_str_list_with_three_nodes(list_with_three_nodes):
+    assert str(list_with_three_nodes) == "LinkedList(" + str(list(list_with_three_nodes)) + ")"
+
+def test_repr_empty_list(empty_list):
+    assert str(empty_list) == "LinkedList([])"
+
+def test_repr_list_with_three_nodes(list_with_three_nodes):
+    assert str(list_with_three_nodes) == "LinkedList(" + str(list(list_with_three_nodes)) + ")"
