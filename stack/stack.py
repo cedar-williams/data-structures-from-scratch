@@ -1,6 +1,8 @@
 from typing import Any
 
 class StackItem:
+    __slots__=("item", "next_down")
+
     def __init__(self, item, next_down = None):
         self.item = item
         self.next_down = next_down
@@ -23,7 +25,7 @@ class Stack:
     def push(self, item: Any) -> None:
         """Add item on top of stack"""
         new_item = StackItem(item)
-        new_item.prev_node = self.top
+        new_item.next_down = self.top
         self.top = new_item
 
     def pop(self) -> Any:
@@ -31,7 +33,7 @@ class Stack:
         :raises IndexError: if stack is empty"""
         self._ensure_not_empty()
         return_node = self.top
-        self.top = self.top.prev_node
+        self.top = self.top.next_down
         return return_node.item
 
     def _ensure_not_empty(self) -> None:
