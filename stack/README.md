@@ -4,7 +4,7 @@ Methods to implement
 - [x] peek
 - [x] pop
 - [x] push
-- [ ] search
+- [x] search
 - [ ] __init__
 - [ ] __len__
 - [ ] __bool__

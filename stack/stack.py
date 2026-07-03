@@ -36,6 +36,20 @@ class Stack:
         self.top = self.top.next_down
         return return_node.item
 
+    def search(self, search_item: Any) -> int:
+        """:returns: How deep down the stack an item is, if it exists, -1 if not"""
+        if self.top is None:
+            return -1
+
+        depth = 0
+        cur_item = self.top
+        while cur_item is not None:
+            if cur_item.item == search_item:
+                return depth
+            depth += 1
+            cur_item = cur_item.next_down
+        return -1
+
     def _ensure_not_empty(self) -> None:
         """:raises IndexError: if stack is empty"""
         if self.top is None:
