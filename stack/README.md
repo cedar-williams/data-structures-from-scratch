@@ -5,9 +5,9 @@ Methods to implement
 - [x] pop
 - [x] push
 - [x] search
-- [ ] __init__
-- [ ] __len__
-- [ ] __bool__
-- [ ] __eq__
-- [ ] __str__
-- [ ] __repr__
+- [x] __init__
+- [x] __len__
+- [x] __bool__
+- [x] __eq__
+- [x] __str__
+- [x] __repr__

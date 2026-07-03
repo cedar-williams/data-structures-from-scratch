@@ -54,3 +54,46 @@ class Stack:
         """:raises IndexError: if stack is empty"""
         if self.top is None:
             raise IndexError("Stack is empty")
+
+    def __len__(self) -> int:
+       length = 0
+       cur_item = self.top
+       while cur_item is not None:
+           length += 1
+           cur_item = cur_item.next_down
+       return length
+
+    def __bool__(self) -> bool:
+        return not self.empty()
+
+    def __eq__(self, other) -> bool:
+        if len(self) != len(other):
+            return False
+        self_item = self.top
+        other_item = other.top
+        while self_item is not None:
+            if self_item.item != other_item.item:
+                return False
+            self_item = self_item.next_down
+            other_item = other_item.next_down
+        return True
+
+    def __str__(self) -> str:
+        return_string = "Stack (top -> bottom) : [ "
+        stack_item = self.top
+        while stack_item is not None:
+            return_string += str(stack_item.item)
+            stack_item = stack_item.next_down
+            if stack_item is not None:
+                return_string += ", "
+        return return_string + " ]"
+
+    def __repr__(self) -> str:
+        return_string = "Stack (top -> bottom) : [ "
+        stack_item = self.top
+        while stack_item is not None:
+            return_string += str(stack_item.item)
+            stack_item = stack_item.next_down
+            if stack_item is not None:
+                return_string += ", "
+        return return_string + " ]"
