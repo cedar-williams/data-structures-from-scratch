@@ -4,13 +4,14 @@ from dynamic_array_iterator import DynamicArrayIterator
 class DynamicArray:
     """Dynamic array of generic type"""
 
-    def __init__(self, capacity = 10) -> None:
+    def __init__(self, capacity: int = 10) -> None:
+        """Initialize a DynamicArray"""
         self.length = 0
         self.capacity = capacity
         self.list = []
 
     def append(self, item):
-        """Add item to the array"""
+        """Add item to the end of the array"""
         self.list.append(item)
         self.length += 1
         self._update_capacity()
@@ -24,10 +25,10 @@ class DynamicArray:
 
     #Capacity changes
     def _update_capacity(self):
-        """Resize if needed"""
+        """Change capacity if needed"""
         if self.length == self.capacity:
             self._grow()
-        elif (self.length <= self.capacity / 2) and (self.capacity > 10):
+        elif (self.length <= self.capacity / 2) and (self.capacity >= 2):
             self._shrink()
 
     def _grow(self):
@@ -35,11 +36,11 @@ class DynamicArray:
         self.capacity *= 2
 
     def _shrink(self):
+        """Decrease the capacity of the array"""
         self.capacity /= 2
 
     def __eq__(self, other: Any) -> bool:
-        """O(n)
-        return true if both DynamicArray's match, false if not"""
+        """Return true if both DynamicArray's match,false if not."""
         if not isinstance(other, DynamicArray):
             return NotImplemented
 
@@ -51,18 +52,22 @@ class DynamicArray:
         return True
 
     def __len__(self) -> int:
+        """:returns: the size of the array"""
         return self.length
 
-    def __iter__(self):
+    def __iter__(self) -> DynamicArrayIterator:
+        """Returns the iterator class, this makes it so multiple iterators can run simultaneously"""
         return DynamicArrayIterator(self)
 
-    def __contains__(self, item):
+    def __contains__(self, item:Any) -> bool:
+        """:returns: true if item is in array, false otherwise"""
         for i in self:
             if i == item:
                 return True
         return False
 
-    def __str__(self):
+    def __str__(self) -> str:
+        """:returns: String representation of array"""
         string = "DynamicArray[ "
         for item in self:
             string += str(item) + " "
