@@ -30,3 +30,16 @@ def test_array():
 def test_contains(array_size, comparison_value, expected_result):
     new_dynamic_array = make_dynamic_array(array_size)
     assert (comparison_value in new_dynamic_array) == expected_result
+
+def test_capacity_changes():
+    new_dynamic_array = DynamicArray(1)
+    new_dynamic_array.append(value_at_index(0))
+    new_dynamic_array.append(value_at_index(1))
+    new_dynamic_array.append(value_at_index(2))
+    assert len(new_dynamic_array) == 3
+    assert str(new_dynamic_array) == "DynamicArray[ obj 0 obj 1 obj 2 ]"
+
+def test_insert():
+    new_dynamic_array = make_dynamic_array(3)
+    new_dynamic_array.insert(1, "cat")
+    assert str(new_dynamic_array) == "DynamicArray[ obj 0 cat obj 1 obj 2 ]"
