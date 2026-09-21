@@ -2,22 +2,18 @@ For this data structure I'll use a python list as the backing data structure but
 
 ## Methods to implement
 
-- [ ] append
-- [ ] pop (index)
-- [ ] remove (value)
-- [ ] insert
-- [ ] get
+- [x] append
+- [x] remove
+- [x] insert
+- [x] get
 - [ ] clear
-- [ ] _update_capacity
-- [ ] _grow
-- [ ] _shrink
-- [ ] __eq__
+- [x] _update_capacity
+- [x] _grow
+- [x] _shrink
+- [x] __eq__
 - [x] __len__
 - [x] __iter__
-- [ ] __contains__
+- [x] __contains__
 - [x] __str__
-- [ ] __repr__
-- [ ] __bool__
-- [ ] __getitem__
-- [ ] __setitem__
-- [ ] __delitem__
+- [x] __getitem__
+- [x] __setitem__
