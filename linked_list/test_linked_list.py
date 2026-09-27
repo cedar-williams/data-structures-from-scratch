@@ -3,6 +3,8 @@ from pygments.lexers import oberon
 from linked_list import LinkedList
 import pytest
 
+from linked_list_iterator import LinkedListIterator
+
 NODE_DUPLICATE_DATA = "node duplicate"
 
 NODE_ONE_DATA = "node one"
@@ -489,7 +491,14 @@ def test_str_list_with_three_nodes(list_with_three_nodes):
     assert str(list_with_three_nodes) == "LinkedList(" + str(list(list_with_three_nodes)) + ")"
 
 def test_repr_empty_list(empty_list):
-    assert str(empty_list) == "LinkedList([])"
+    assert repr(empty_list) == "LinkedList([])"
 
 def test_repr_list_with_three_nodes(list_with_three_nodes):
-    assert str(list_with_three_nodes) == "LinkedList(" + str(list(list_with_three_nodes)) + ")"
+    assert repr(list_with_three_nodes) == "LinkedList(" + str(list(list_with_three_nodes)) + ")"
+
+def test_iterator_iter(list_with_three_nodes):
+    my_iterator = LinkedListIterator(list_with_three_nodes)
+    assert iter(my_iterator) == my_iterator
+
+def test_eq_not_impl(list_with_three_nodes):
+    assert list_with_three_nodes != "Cats"
