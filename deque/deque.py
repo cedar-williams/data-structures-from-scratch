@@ -49,6 +49,12 @@ class Deque:
         :return: The list item"""
         if self.tail is None:
             return None
+        if self.tail is self.head:
+            tmp_node = self.tail
+            self.tail = None
+            self.head = None
+            self.length = 0
+            return tmp_node.val
         else:
             tmp_node = self.tail
             self.tail = self.tail.prev
@@ -61,6 +67,12 @@ class Deque:
         :return: the list item"""
         if self.head is None:
             return None
+        if self.tail is self.head:
+            tmp_node = self.tail
+            self.tail = None
+            self.head = None
+            self.length = 0
+            return tmp_node.val
         else:
             tmp_node = self.head
             self.head = self.head.next

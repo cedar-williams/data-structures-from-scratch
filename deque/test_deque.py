@@ -55,11 +55,31 @@ def test_pop():
     assert popped_val == "cows"
     assert list(new_deque) == ["dogs", "cats"]
 
+def test_pop_empty():
+    new_deque = Deque()
+    assert new_deque.pop() is None
+
+def test_pop_one_val():
+    new_deque = make_deque(["cats"])
+    result = new_deque.pop()
+    assert result == "cats"
+    assert not new_deque
+
 def test_pop_left():
     new_deque = make_deque(["cats", "dogs", "cows"])
     popped_val = new_deque.pop_left()
     assert popped_val == "cats"
     assert list(new_deque) == ["cows", "dogs"]
+
+def test_pop_left_empty():
+    new_deque = Deque()
+    assert new_deque.pop_left() is None
+
+def test_pop_left_one_val():
+    new_deque = make_deque(["cats"])
+    result = new_deque.pop_left()
+    assert result == "cats"
+    assert not new_deque
 
 def test_peek():
     new_deque = make_deque(["cats", "dogs", "cows"])
