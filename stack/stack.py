@@ -67,6 +67,8 @@ class Stack:
         return not self.empty()
 
     def __eq__(self, other) -> bool:
+        if not isinstance(other, Stack):
+            return NotImplemented
         if len(self) != len(other):
             return False
         self_item = self.top

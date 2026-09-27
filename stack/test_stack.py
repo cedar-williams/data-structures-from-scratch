@@ -143,6 +143,9 @@ def test_eq_same_len():
     stack_2.push("dogs")
     assert stack_1 != stack_2
 
+def test_eq_different_class():
+    my_stack = make_stack(5)
+    assert my_stack.__eq__(5) is NotImplemented
 
 # __str__
 def test_str_empty():
