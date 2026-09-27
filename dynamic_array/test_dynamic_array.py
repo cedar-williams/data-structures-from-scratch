@@ -3,6 +3,8 @@ from typing import Any
 import pytest
 
 from dynamic_array import DynamicArray
+from dynamic_array_iterator import DynamicArrayIterator
+
 
 def make_dynamic_array(length: int) -> DynamicArray:
     new_dynamic_array = DynamicArray()
@@ -48,6 +50,12 @@ def test_get_at_index():
     new_dynamic_array = make_dynamic_array(3)
     assert new_dynamic_array[1] == value_at_index(1)
 
+@pytest.mark.parametrize("test_index", [-1,4])
+def test_get_at_bad_index(test_index):
+    new_dynamic_array = make_dynamic_array(3)
+    with pytest.raises(IndexError):
+        new_dynamic_array.get(test_index)
+
 def test_remove_at_index():
     length = 3
     new_dynamic_array = make_dynamic_array(length)
@@ -58,6 +66,12 @@ def test_remove_at_index():
 def test_set():
     new_dynamic_array = make_dynamic_array(3)
     new_dynamic_array.set(1, "cat")
+    assert str(new_dynamic_array) == "DynamicArray[ obj 0 cat obj 2 ]"
+
+def test_set_by_dunder():
+    new_dynamic_array = make_dynamic_array(3)
+    new_dynamic_array[1] = "cat"
+    assert new_dynamic_array[1] == "cat"
     assert str(new_dynamic_array) == "DynamicArray[ obj 0 cat obj 2 ]"
 
 def test_eq():
@@ -89,3 +103,11 @@ def test_clear():
     new_dynamic_array1.clear()
     assert new_dynamic_array1.length == 0
     assert str(new_dynamic_array1) == "DynamicArray[ ]"
+
+def test_iterator_iter():
+    my_iterator = DynamicArrayIterator(make_dynamic_array(4))
+    assert iter(my_iterator) is my_iterator
+
+def test_eq_diff_class():
+    new_dynamic_array = make_dynamic_array(3)
+    assert new_dynamic_array != "cats"
