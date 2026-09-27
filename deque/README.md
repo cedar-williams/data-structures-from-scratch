@@ -8,7 +8,7 @@ Methods to implement:
 - [x] peekLeft
 - [x] clear
 - [x] size
-- [?] reverse
+- [x] reverse
 - [x] __contains__
 - [x] __len__
 - [x] __bool__
