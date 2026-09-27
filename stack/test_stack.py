@@ -136,6 +136,13 @@ def test_eq_fail(stack_1_size: int, stack_2_size: int):
     assert stack_1 != stack_2
     assert stack_1 is not stack_2
 
+def test_eq_same_len():
+    stack_1 = make_stack(4)
+    stack_2 = make_stack(4)
+    stack_1.push("cats")
+    stack_2.push("dogs")
+    assert stack_1 != stack_2
+
 
 # __str__
 def test_str_empty():
@@ -163,5 +170,3 @@ def test_repr_empty():
 def test_repr_with_values(stack_size: int,expected_str: str):
     new_stack = make_stack(stack_size)
     assert repr(new_stack) == expected_str
-
-
