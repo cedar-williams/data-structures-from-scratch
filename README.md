@@ -3,7 +3,7 @@ This is an implementation of data structures as I learn them.  For each I will i
 - [x] Linked List
 - [x] Dynamic Array
 - [x] Stack
-- [ ] Deque
+- [x] Deque
 - [ ] Hash Table / Hash Map
 - [ ] Binary Search Tree
 - [ ] Heap / Priority Queue
