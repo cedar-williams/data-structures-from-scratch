@@ -46,6 +46,11 @@ def test_insert():
     new_dynamic_array.insert(1, "cat")
     assert str(new_dynamic_array) == "DynamicArray[ obj 0 cat obj 1 obj 2 ]"
 
+def test_insert_invalid_index():
+    new_dynamic_array = make_dynamic_array(3)
+    with pytest.raises(IndexError):
+        new_dynamic_array.insert(4, "cat")
+
 def test_get_at_index():
     new_dynamic_array = make_dynamic_array(3)
     assert new_dynamic_array[1] == value_at_index(1)
@@ -63,10 +68,20 @@ def test_remove_at_index():
     assert str(new_dynamic_array) == "DynamicArray[ obj 0 obj 2 ]"
     assert len(new_dynamic_array) == length - 1
 
+def test_remove_at_invalid_index():
+    new_dynamic_array = make_dynamic_array(3)
+    with pytest.raises(IndexError):
+        new_dynamic_array.remove(4)
+
 def test_set():
     new_dynamic_array = make_dynamic_array(3)
     new_dynamic_array.set(1, "cat")
     assert str(new_dynamic_array) == "DynamicArray[ obj 0 cat obj 2 ]"
+
+def test_set_at_bad_index():
+    new_dynamic_array = make_dynamic_array(3)
+    with pytest.raises(IndexError):
+        new_dynamic_array.set(4, "cats")
 
 def test_set_by_dunder():
     new_dynamic_array = make_dynamic_array(3)

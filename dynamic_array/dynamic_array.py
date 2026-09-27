@@ -24,6 +24,8 @@ class DynamicArray:
 
     def insert(self, index: int, item: Any) -> None:
         """Insert item at specified index"""
+        if index < 0 or index >= self.length:
+            raise IndexError("Requested index is outside of array")
         self.length += 1
         self._update_capacity()
         cur_item = self.get(index)
@@ -36,6 +38,8 @@ class DynamicArray:
 
     def remove(self, index) -> Any:
         """Remove and return item at index"""
+        if index < 0 or index >= self.length:
+            raise IndexError("Requested index is outside of array")
         item = self.list[index]
         for x in range(index, self.length - 1):
             self.list[x] = self.list[x + 1]
@@ -53,6 +57,8 @@ class DynamicArray:
 
     def set(self, index: int, item: Any) -> None:
         """Set the value of the item at the specified index"""
+        if index < 0 or index >= self.length:
+            raise IndexError("Requested index is outside of array")
         self.list[index] = item
 
     def clear(self) -> None:
@@ -78,7 +84,7 @@ class DynamicArray:
 
     def _shrink(self) -> None:
         """Decrease the capacity of the array"""
-        self.capacity /= 2
+        self.capacity = self.capacity // 2
 
     def _capacity_size_ratio(self) -> float:
         """Return a ratio of how full the array is"""
@@ -122,4 +128,4 @@ class DynamicArray:
         return self.get(item)
 
     def __setitem__(self, index, item) -> None:
-        self.list[index] = item
+        self.set(index, item)
