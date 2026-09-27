@@ -29,7 +29,7 @@ def test_array():
 @pytest.mark.parametrize("array_size, comparison_value, expected_result",
                          [(1, "DynamicArray[ ]", False),
                           (1, "obj 0", True)])
-def test_contains(array_size, comparison_value, expected_result):
+def test_contains_parametrized(array_size, comparison_value, expected_result):
     new_dynamic_array = make_dynamic_array(array_size)
     assert (comparison_value in new_dynamic_array) == expected_result
 
