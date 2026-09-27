@@ -94,6 +94,8 @@ class Deque:
 
     def reverse(self) -> None:
         """Reverse the list in place"""
+        old_head = self.head
+        old_tail  = self.tail
         cur = self.head
         while cur is not None:
             next_node = cur.next
@@ -101,6 +103,8 @@ class Deque:
             cur.prev = next_node
             cur.next = tmp
             cur = next_node
+        self.head = old_tail
+        self.tail = old_head
 
     def __contains__(self, item):
         """:return: True if item in deque, else false"""
@@ -145,7 +149,7 @@ class Deque:
         cur_s = self.head
         cur_v = value.head
         while cur_s:
-            if cur_s.val != cur_s.val:
+            if cur_s.val != cur_v.val:
                 return False
             cur_s = cur_s.next
             cur_v = cur_v.next
